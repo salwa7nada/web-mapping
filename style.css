@@ -1,0 +1,82 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Permet d'organiser le contenu verticalement */
+}
+h1 {
+    color: #c24c4c;
+    font-size: 30px;
+    text-align: center; /* Centre le texte du titre */
+    margin: 20px 0; /* Ajoute un espace autour du titre */
+}
+
+
+.leaflet-container {
+    height: 50%;
+    width: 50%; /* Prend toute la largeur de la page */
+    border: 2px solid #020c17; /* Couleur et épaisseur de la bordure */
+    border-radius: 8px; /* Arrondi des coins de la bordure */
+    box-shadow: 4px 4px 8px rgba(14, 0, 0, 0.975); /* Ombre légère pour donner du relief */
+    margin-bottom: 20px; /* Espace sous la carte */
+    margin-left: 20px;
+    
+}
+.map-description {
+    text-align: bottom;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+section {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+
+h2{
+    color: #4cc261;
+}
+
+h3 {
+    color: #011b06;
+}
+p {
+    line-height: 1.6;
+    color: #555;
+}
+.uniform-image {
+    width: 100%; /* Largeur responsive */
+    height: auto; /* Maintient le rapport d'aspect */
+    max-width: 400px; /* Limite la largeur maximale si nécessaire */
+    object-fit: cover; /* Remplit l'image sans déformer le rapport d'aspect */
+    border-radius: 8px; /* Optionnel : arrondit les coins */
+    display: block; /* Centre l'image */
+    margin: 10px auto; /* Centre l'image */
+}
+/* Style pour le conteneur de la carte et du texte */
+.container {
+    display: flex; /* Utilise flexbox pour disposer la carte et le texte côte à côte */
+    justify-content: space-between; /* Espace entre les éléments */
+    align-items: flex-start; /* Aligne les éléments en haut */
+    width: 100%;
+}
+.text-section {
+    flex: 1; /* Prend l'espace restant */
+    padding: 20px; /* Ajoute du padding */
+}
+/* Style pour le pied de page */
+footer {
+    text-align: center; /* Centre le texte dans le pied de page */
+    padding: 20px;
+    background-color: #f8f8f8; /* Couleur de fond */
+    position: relative;
+    bottom: 0; /* Fixe le pied de page en bas */
+    width: 100%; /* Prend toute la largeur de la page */
+    border-top: 1px solid #ccc; /* Ligne supérieure */
+}
+footer p, footer h3 {
+    margin: 5px 0; /* Espace entre les éléments */
+}

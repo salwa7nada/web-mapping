@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Découverte du Maroc</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <link rel="stylesheet" href="leaflet.css">
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-minimap@3.6.0/dist/Control.MiniMap.min.css" />
+  
+    <script src="leaflet.js"></script>
+    <script src="region.geojson" type="text/javascript"></script>
+    <script src="commune.geojson"  type="text/javascript"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/leaflet-minimap@3.6.0/dist/Control.MiniMap.min.js"></script>
+    
+
+    
+</head>
+<body>
+
+    <div class="container">
+        <div id="map" class="leaflet-container">
+        
+    </div>
+        <section class="text-section">
+            <h1> Maroc</h1>
+            <h2>Découverte du Maroc</h2>
+            <h3>Géographie et paysage</h3>
+            <p>
+                Le Maroc est un pays situé à l'extrême nord-ouest de l'Afrique, baigné par l'océan Atlantique à l'ouest et la mer Méditerranée au nord. Il est connu pour sa diversité géographique, allant des montagnes de l'Atlas aux vastes plaines côtières et aux dunes du Sahara.
+            </p>
+            <img src="images/maroc4.jpeg" alt="Paysage marocain" class="uniform-image" />
+
+            <h3>Culture et patrimoine</h3>
+            <p>
+                Le Maroc possède un patrimoine culturel fascinant, marqué par des influences berbères, arabes et européennes. Les grandes villes marocaines, telles que Marrakech, Fès, Rabat et Casablanca, témoignent de l'histoire riche et variée du pays.
+            </p>
+            <img src="images/maroc3.jpeg" alt="Culture marocaine" class="uniform-image" />
+
+            <h3>Gastronomie</h3>
+            <p>
+                Le Maroc est réputé pour sa gastronomie savoureuse, qui mélange des épices, des herbes et des ingrédients frais. Des plats emblématiques tels que le tajine, le couscous et le pastilla illustrent la richesse de la cuisine marocaine.
+            </p>
+            <img src="images/maroc2.jpeg" alt="Plat marocain" class="uniform-image" />
+
+            <h3>Paysages impressionnants</h3>
+            <p>
+                Les montagnes de l'Atlas, avec leurs sommets enneigés, attirent les amateurs de randonnée et d'aventure, tandis que le Sahara, avec ses dunes dorées, propose des expériences inoubliables de désert.
+            </p>
+            <img src="images/maroc1.jpeg" alt="Montagnes de l'Atlas" class="uniform-image" />
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Découverte du Maroc. Tous droits réservés.</p>
+        <h3>Réalisé par : Nada Nassiri et Salwa Oksih</h3>
+        <p>Email : <a href="mailto:contact@decouvertedumaroc.com">contact@decouvertedumaroc.com</a></p>
+        <p>Téléphone : +212 6 1234 5678</p>
+    </footer>
+
+    <script>
+        const map = L.map('map').setView([33, -6], 6);
+
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        function onMapClick(e) {
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent(`Vous avez cliqué sur la carte à ${e.latlng.toString()}`)
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+        L.geoJSON(Region).addTo(map);
+        map.on('click', onMapClick);
+        L.geoJSON(Region).addTo(map);
+        const markers = L.markerClusterGroup();
+        markers.addLayer(L.marker([34.020882, -6.841650])); 
+        markers.addLayer(L.marker([33.614564, -7.48705]));  
+        markers.addLayer(L.marker([35.783291, -5.802027]));
+        markers.addLayer(L.marker([30.424715, -9.618266]));
+        map.addLayer(markers);
+        map.addControl(new L.Control.Fullscreen());
+        L.Control.geocoder().addTo(map);
+        // Leaflet.Draw plugin: Add drawing functionality
+	    const drawnItems = new L.FeatureGroup();
+	    map.addLayer(drawnItems);
+	    const drawControl = new L.Control.Draw({
+		    edit: {
+			   featureGroup: drawnItems
+		    }
+	    });
+	    map.addControl(drawControl);
+
+	    // Leaflet.Draw: Handle draw events
+	    map.on(L.Draw.Event.CREATED, function (e) {
+		   const layer = e.layer;
+		   drawnItems.addLayer(layer);
+	    });
+        // Add Leaflet MiniMap
+	const miniMap = new L.Control.MiniMap(
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+	).addTo(map);
+
+    </script>
+
+</body>
+</html>
+
+
