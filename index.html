@@ -42,7 +42,7 @@
             <p>
                 Le Maroc est un pays situé à l'extrême nord-ouest de l'Afrique, baigné par l'océan Atlantique à l'ouest et la mer Méditerranée au nord. Il est connu pour sa diversité géographique, allant des montagnes de l'Atlas aux vastes plaines côtières et aux dunes du Sahara.
             </p>
-            <img src="maroc4.jpeg" alt="Paysage marocain" class="uniform-image" />
+            <img src="images/maroc4.jpeg" alt="Paysage marocain" class="uniform-image" />
 
             <h3>Culture et patrimoine</h3>
             <p>
@@ -87,9 +87,7 @@
         }
 
         map.on('click', onMapClick);
-        L.geoJSON(Region).addTo(map);
-        map.on('click', onMapClick);
-        L.geoJSON(Region).addTo(map);
+
         const markers = L.markerClusterGroup();
         markers.addLayer(L.marker([34.020882, -6.841650])); 
         markers.addLayer(L.marker([33.614564, -7.48705]));  
@@ -117,6 +115,27 @@
 	const miniMap = new L.Control.MiniMap(
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
 	).addTo(map);
+    function getColor(d) {
+    return d > 6000000 ? '#800026' :
+           d > 5000000  ? '#BD0026' :
+           d > 4000000  ? '#E31A1C' :
+           d > 3000000  ? '#FC4E2A' :
+           d > 2000000   ? '#FD8D3C' :
+           d > 1000000   ? '#FEB24C' :
+           d > 900000   ? '#FED976' :
+                      '#FFEDA0';
+}
+function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.Population)
+		};
+    }
+    L.geoJson(Region, {style: style}).addTo(map);
 
     </script>
 
